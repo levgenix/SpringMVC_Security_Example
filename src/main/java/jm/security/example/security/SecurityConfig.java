@@ -29,7 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // http.csrf().disable(); - попробуйте выяснить сами, что это даёт
+        http.csrf().configure(http); // добавляет в форму авторизации <input name="_csrf" type="hidden" value="33520895-0182-41da-b60c-5671e62559d4" />
+        //http.csrf().disable(); //- попробуйте выяснить сами, что это даёт
         http.authorizeRequests()
                 .antMatchers("/").permitAll() // доступность всем
                 .antMatchers("/user").access("hasAnyRole('ROLE_USER')") // разрешаем входить на /user пользователям с ролью User
